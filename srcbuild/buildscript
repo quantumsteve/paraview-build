@@ -1,0 +1,57 @@
+#!/bin/bash -ex
+##############################################################################
+# Script for doing a ParaView source build on Linux/OSX
+#
+# BUILD_THREADS is set in the Jenkins node configuration
+#
+# This will create a directory for the PARAVIEW_DIR configuration
+# variable like:
+#
+# OSX:   /Users/builder/build/ParaView-X.Y.Z
+# Linux: /home/builder/build/ParaView-X.Y.Z
+##############################################################################
+
+# Set the ParaView version to build
+PV_VERSION=v4.2.0
+PV_VERSION2=${PV_VERSION%.*}
+PV_VERSION3=${PV_VERSION/v/}
+
+# Set the source and build directories
+BUILDER=builder
+
+if [[ $(uname) == "Darwin" ]]; then
+  HOME_DIR=/Users/${BUILDER}
+else
+  HOME_DIR=/home/${BUILDER}
+fi
+
+SRC_DIR=${HOME_DIR}/src
+BUILD_DIR=${HOME_DIR}/build
+
+# Print some things
+cmake --version
+
+# Setup directories if they don't exist.
+[[ -d ${SRC_DIR} ]] || mkdir ${SRC_DIR}
+[[ -d ${BUILD_DIR} ]] || mkdir ${BUILD_DIR}
+
+# Grab source package and unpack
+cd ${SRC_DIR}
+PARAVIEW_SRC=ParaView-${PV_VERSION}-source
+if [[ ! -d ${PARAVIEW_SRC} ]]; then
+  wget http://www.paraview.org/files/${PV_VERSION2}/${PARAVIEW_SRC}.tar.gz
+  tar zxvf ${PARAVIEW_SRC}.tar.gz
+fi
+
+# Go to build area, setup and run
+cd ${BUILD_DIR}
+PARAVIEW_BUILD=ParaView-${PV_VERSION3}
+[[ -d ${PARAVIEW_BUILD} ]] || mkdir ${PARAVIEW_BUILD}
+cd ${PARAVIEW_BUILD}
+
+BUILDOPTS="-DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release"
+PVOPTS="-DPARAVIEW_BUILD_QT_GUI=ON -DPARAVIEW_ENABLE_MATPLOTLIB=ON -DPARAVIEW_ENABLE_PYTHON=ON"
+
+cmake ${BUILDOPTS} ${PVOPTS} ${SRC_DIR}/${PARAVIEW_SRC}
+
+make -j ${BUILD_THREADS}
