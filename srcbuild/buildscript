@@ -39,7 +39,7 @@ cmake --version
 cd ${SRC_DIR}
 PARAVIEW_SRC=ParaView-${PV_VERSION}-source
 if [[ ! -d ${PARAVIEW_SRC} ]]; then
-  wget http://www.paraview.org/files/${PV_VERSION2}/${PARAVIEW_SRC}.tar.gz
+  curl -O http://www.paraview.org/files/${PV_VERSION2}/${PARAVIEW_SRC}.tar.gz
   tar zxvf ${PARAVIEW_SRC}.tar.gz
 fi
 
