@@ -67,3 +67,10 @@ if ERRORLEVEL 1 exit /B %ERRORLEVEL%
 
 "C:\Program Files (x86)\CMake 2.8\bin\cpack.exe" -C %BUILD_CONFIG%
 if ERRORLEVEL 1 exit /B %ERRORLEVEL%
+
+:: Need to copy the artifact back to the workspace otherwise the build will fail
+if not %WORKSPACE%\build (
+    md %WORKSPACE%\build
+)
+
+copy /Y *.exe %WORKSPACE%\build
