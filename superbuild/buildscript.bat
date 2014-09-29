@@ -69,7 +69,7 @@ if ERRORLEVEL 1 exit /B %ERRORLEVEL%
 if ERRORLEVEL 1 exit /B %ERRORLEVEL%
 
 :: Need to copy the artifact back to the workspace otherwise the build will fail
-if not %WORKSPACE%\build (
+if not exist %WORKSPACE%\build (
     md %WORKSPACE%\build
 )
 
