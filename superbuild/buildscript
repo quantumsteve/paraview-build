@@ -18,7 +18,9 @@ echo "OSX VERSION = ${OSX_VERSION}"
 
 # Get ParaView superbuild
 
-git clone -b v4.2.0 git://paraview.org/ParaViewSuperbuild.git
+if [[ ! -d ParaViewSuperbuild ]]; then 
+  git clone -b v4.2.0 git://paraview.org/ParaViewSuperbuild.git
+fi
 
 # Create build directory
 
