@@ -12,7 +12,6 @@ set CMAKE_CMD="C:\Program Files (x86)\CMake 2.8\bin\cmake.exe"
 :: Set the system PATH for Qt and Python
 
 set THIRD_PARTY=C:\Third_Party
-set THIRD_PARTY=C:\Users\2zr\Sources\git\mantid\Code\Third_Party
 set THIRD_PARTY_LIB=%THIRD_PARTY%\lib\win64
 set PATH=%THIRD_PARTY_LIB%;%THIRD_PARTY_LIB%\Python27;%PATH%
 :: Set Python paths since system has hard time figuring this out.
