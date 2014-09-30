@@ -54,7 +54,7 @@ if not exist %PARAVIEW_SRC% (
 
 :: Go to build area, setup and run
 cd %BUILD_DIR%
-PARAVIEW_BUILD=ParaView-%PV_VERSION3%
+set PARAVIEW_BUILD=ParaView-%PV_VERSION3%
 if not exist %PARAVIEW_BUILD% (
     md %PARAVIEW_BUILD%
 )
