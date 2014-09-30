@@ -49,6 +49,7 @@ set PARAVIEW_SRC=ParaView-%PV_VERSION%-source
 if not exist %PARAVIEW_SRC% (
   "C:\Program Files\cURL\bin\curl.exe" -O http://www.paraview.org/files/%PV_VERSION2%/%PARAVIEW_SRC%.tar.gz
   "C:\Program Files\7-Zip\7z.exe" x -y %PARAVIEW_SRC%.tar.gz
+  "C:\Program Files\7-Zip\7z.exe" x -y %PARAVIEW_SRC%.tar
 )
 
 :: Go to build area, setup and run
