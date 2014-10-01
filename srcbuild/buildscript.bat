@@ -37,10 +37,9 @@ set SRC_DIR=C:\Sources
 if not exist %BUILD_DIR% (
     md %BUILD_DIR%
 )
-set HAVE_SRC_DIR=1
+
 if not exist %SRC_DIR% (
     md %SRC_DIR%
-	set HAVE_SRC_DIR=0
 )
 
 :: Grab source package and unpack
@@ -54,11 +53,6 @@ if not exist %PARAVIEW_SRC% (
 
 :: Go to build area, setup and run
 cd %BUILD_DIR%
-set PARAVIEW_BUILD=ParaView-%PV_VERSION3%
-if not exist %PARAVIEW_BUILD% (
-    md %PARAVIEW_BUILD%
-)
-cd %PARAVIEW_BUILD%
 
 set BUILD_CONFIG=Release
 set BUILDOPTS=-DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=%BUILD_CONFIG%
