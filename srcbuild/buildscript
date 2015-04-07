@@ -12,7 +12,7 @@
 ##############################################################################
 
 # Set the ParaView version to build
-PV_VERSION=v4.2.0
+PV_VERSION=v4.3.1
 PV_VERSION2=${PV_VERSION%.*}
 PV_VERSION3=${PV_VERSION/v/}
 
